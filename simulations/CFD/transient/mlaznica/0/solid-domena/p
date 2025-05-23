@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0/solid-domena";
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 100000;
+
+boundaryField
+{
+    wall-unutra
+    {
+        type            calculated;
+        value           uniform 100000;
+    }
+    wall-unutra-ref
+    {
+        type            calculated;
+        value           uniform 100000;
+    }
+    wall-vani
+    {
+        type            calculated;
+        value           uniform 100000;
+    }
+    wall-vani-ref
+    {
+        type            calculated;
+        value           uniform 100000;
+    }
+    intersection-wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    wedge-wall
+    {
+        type            calculated;
+        value           uniform 100000;
+    }
+    wedge-wall-coolant
+    {
+        type            calculated;
+        value           uniform 100000;
+    }
+}
+
+
+// ************************************************************************* //

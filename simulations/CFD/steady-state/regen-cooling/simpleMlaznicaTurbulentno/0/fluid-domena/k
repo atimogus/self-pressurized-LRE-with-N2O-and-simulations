@@ -1,0 +1,81 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 1.08e-3; // 1.08e-3 = 1.125*(69.4)^2/5e6 // 11=3.9% 18.1=5%;
+
+boundaryField
+{
+
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0.03375;
+        // type            turbulentIntensityKineticEnergyInlet;
+        // intensity       0.05;       // 5% turbulence intensity
+        // U               U;
+        // value           uniform 0.00375;
+    }
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.00015;
+        value           uniform 0.00015;    
+    }
+    intersection-wall
+    {
+        type            nutkRoughWallFunction;
+        Ks              uniform 5e-5;      // roughness height [m]
+        Cs              uniform 0.5;       // roughness constant (0.5–0.6 typical)
+        value           uniform 0;
+    }
+
+    // inlet
+    // {
+    //     type            fixedValue;
+    //     value           $internalField;
+    // }
+
+    // outlet
+    // {
+    //     type            zeroGradient;
+    // }
+
+    // topWall
+    // {
+    //     type            zeroGradient;
+    // }
+
+    // bottomWall
+    // {
+    //     type            kqRWallFunction;
+    //     value           $internalField;
+    // }
+
+    // symmetry
+    // {
+    //     type            symmetryPlane;
+    // }
+
+    // frontAndBack
+    // {
+    //     type            empty;
+    // }
+}
+
+
+// ************************************************************************* //

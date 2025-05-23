@@ -1,0 +1,74 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dictionaryReplacement
+{
+
+    boundary
+    {
+        minY
+        {
+            type            wall;
+        }
+		maxY
+        {
+            type            wall;
+        }
+		wall
+		{
+		type	wall;
+		}
+	pipewall_to_pipe
+	{
+	    type            mappedWall;
+        sampleMode      nearestPatchFace;
+		sampleRegion    pipe;
+		samplePatch     pipe_to_pipewall;
+		
+	}
+        
+    }
+
+    T
+    {
+        internalField   uniform 300;
+
+        boundaryField
+        {
+            ".*"
+            {
+        type            externalWallHeatFluxTemperature;
+        value           uniform 300;
+        Ta              300;
+        h               20;
+        kappa           solidThermo;
+        kappaName       none;
+				
+            }
+            pipewall_to_pipe
+            {
+                type            compressible::turbulentTemperatureCoupledBaffleMixed;
+                Tnbr            T;
+                kappa           solidThermo;
+                kappaName       none;
+                value           uniform 300;
+            }
+            
+        }
+    }
+}
+
+// ************************************************************************* //

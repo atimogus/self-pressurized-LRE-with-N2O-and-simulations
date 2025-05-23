@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/CleanFunctions
+
+cleanCase
+
+rm -r cases/fluid-domena/constant/polyMesh
+rm -r cases/solid-domena/constant/polyMesh
+rm -r constant/fluid-domena/polyMesh
+rm -r constant/solid-domena/polyMesh
+rm -r 0/polyMesh
+rm -r processor*
+rm -r log.*
+rm -r cases/geometrija/*
+rm -r cases/fluid-domena/fluid-domena.stl
+rm -r cases/solid-domena/solid-domena.stl

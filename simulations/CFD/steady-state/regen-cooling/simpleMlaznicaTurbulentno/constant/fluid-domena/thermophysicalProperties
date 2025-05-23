@@ -1,0 +1,61 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/fluid-domena";
+    object      thermophysicalProperties;
+    // IPA-isopropyl alcohol
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+thermoType
+{
+    type            heRhoThermo;
+    mixture         pureMixture;
+    transport       const; 
+    thermo          hConst;
+    equationOfState rhoConst;  // originall equationOfState perfectFluid
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+mixture
+{
+    specie
+    {
+        nMoles          1;
+        molWeight       60.1;          // g/mol for IPA (C3H8O)
+    }
+    thermodynamics
+    {
+        Cp              2560;          // J/(kg·K) at ~25°C
+        Hf              0;
+    }
+    //IPA
+    transport
+    {
+        mu              2e-03;      // Pa·s at 25°C
+        Pr              21;          // High Pr due to low thermal conductivity
+    }
+
+	equationOfState
+    {
+        //R               138.6;         // R = 8314 / molWeight = 8314 / 60.1
+        rho            786;           // kg/m³ at 25°C
+    }
+
+}
+
+// limitTemperature    yes;
+// minTemperature      250;
+// maxTemperature      2000;
+
+// ************************************************************************* //
