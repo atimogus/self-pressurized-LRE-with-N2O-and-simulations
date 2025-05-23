@@ -21,7 +21,9 @@ python main.py
 
 ## Roadmap / TODO
 
-- [ ] Rocket trajectory analysis using **RocketPy**
-- [ ] Detailed analysis of **showerhead (scrintle) injectors**
 - [ ] Automated cooling channel design using **FreeCAD**
 - [ ] Automated **CFD simulation** with **OpenFOAM**, including optimization of the number of cooling channels
+- [ ] Rocket trajectory analysis using **RocketPy**
+- [ ] Detailed analysis of **showerhead (scrintle) injectors** - time_spray + time_combustion + time_mixing -> for combustion chamber design lenght 
+- [ ] Bell shaped nozzle design
+
