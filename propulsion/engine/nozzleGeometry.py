@@ -88,6 +88,7 @@ class NozzleGeometry:
         convergent_nozzle_length = (self.combustion_chamber_diameter/2 - self.throat_diameter/2 ) / np.tan(np.radians(45))
         return convergent_nozzle_length
     
+    #@staticmethod
     def printNozzleGeometry(self):
         print("\n---------------------------- INITIAL Nozzle Geometry:-------------------------------")
         # Print nozzle parameters with values rounded to the second decimal

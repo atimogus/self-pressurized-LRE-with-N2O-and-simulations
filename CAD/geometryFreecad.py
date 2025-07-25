@@ -8,11 +8,11 @@ data_file = os.path.join(script_dir, "design_data.json")
 with open(data_file, "r") as f:
     regenNozzleDesign = json.load(f)
 
-print(f"Loaded design data: {regenNozzleDesign}")
+print(f"\nLoaded design data for : {regenNozzleDesign}\n")
 
 # FreeCAD operations
 # doc_path = os.path.join(script_dir, "mlaznica3DPrint.FCStd")
-doc_path = os.path.join(script_dir, regen_data["fcstd_filename"])
+doc_path = os.path.join(script_dir, regenNozzleDesign["fcstd_filename"])
 doc = FreeCAD.openDocument(doc_path)
 
 sheet = doc.getObject("Spreadsheet")
@@ -36,7 +36,11 @@ sheet.set('C16', str(regenNozzleDesign["fi_inlet_stupnjevi_ulaz"]))
 sheet.set('C17', str(regenNozzleDesign["fi_inlet_stupnjevi_izlaz"]))
 sheet.set('C19', str(regenNozzleDesign["channel_height"] * 1000))
 
-sheet.set('C21', str(regenNozzleDesign["n_revolve"]))
+sheet.set('A22', str(regenNozzleDesign["CONVERGENT_NOZZLE_ANGLE"]))
+sheet.set('A23', str(regenNozzleDesign["DIVERGENT_NOZZLE_ANGLE"]))
+sheet.set('A24', str(regenNozzleDesign["Combustion_Chamber_Height"] * 1000))
+sheet.set('A25', str(regenNozzleDesign["Divergent_Nozzle_Length"] * 1000))
+sheet.set('A26', str(regenNozzleDesign["Convergent_Nozzle_Length"] * 1000))
 
 sheet.recompute()
 doc.recompute()

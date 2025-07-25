@@ -1,0 +1,8 @@
+*.msh
+*.FCBak
+*.FCStd
+__pycache__/
+*.pyc
+*.sync_*
+Desktop.ini
+*.AppImage

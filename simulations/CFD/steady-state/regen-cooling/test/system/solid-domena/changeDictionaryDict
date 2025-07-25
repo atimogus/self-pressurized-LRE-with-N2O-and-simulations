@@ -1,0 +1,59 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+boundary
+{
+    wall-unutra
+    {
+        type            wall;
+    }
+    wall-unutra-ref
+    {
+        type            wall;
+    }
+	wall-vani
+    {
+        type            wall;
+    }
+	wall-vani-ref
+    {
+        type            wall;
+    }
+    symmetry1
+    {
+        type            cyclicAMI;
+        neighbourPatch  symmetry2;
+
+    }
+    symmetry2
+    {
+        type            cyclicAMI;
+        neighbourPatch  symmetry1;
+    }
+    intersection-wall
+    {
+        //type            mappedWall;
+        type            mappedPatch;
+        sampleMode      nearestPatchFaceAMI;
+        sampleRegion    fluid-domena;
+        samplePatch     intersection-wall;
+    }
+    
+}
+
+
+// ************************************************************************* //

@@ -14,6 +14,8 @@ class CEACantera:
         self.OXIDIZER_TO_FUEL_RATIO = OXIDIZER_TO_FUEL_RATIO
 
         self.calculate(self.OXIDIZER_TO_FUEL_RATIO)
+
+        self.prandtl_number = self.gas.viscosity * self.gas.cp_mass / self.gas.thermal_conductivity
     
 
     def calculate(self, o_f, temperature=None, pressure_chamber=None):
@@ -52,3 +54,5 @@ class CEACantera:
         print(f"Specific Heat Ratio: {self.gam:.2f}")
         print(f"Gas Constant: {self.R:.2f} J/(kg*K)")
         print(f"Viscosity: {self.gas.viscosity} Pa*s")
+        print(f"Thermal Conductivity: {self.gas.thermal_conductivity} W/(m*K)")
+        print(f"Prandtl Number: {self.prandtl_number:.2f}")

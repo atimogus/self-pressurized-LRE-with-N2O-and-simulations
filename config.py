@@ -7,13 +7,13 @@ class Config:
 
     # Simulation Parameters
     TIME_STEP = 0.03
-    INITIAL_TEMP_DEGREES = 0                        # degrees Celsius
+    INITIAL_TEMP_DEGREES = 23                        # degrees Celsius
     INITIAL_TEMP_K = INITIAL_TEMP_DEGREES + 273.15  # Kelvin
     gravity_constant = 9.81 # m/s^2, gravitational constant
 
     # Tank Properties
     OXIDIZER_MASS_KG = 22   
-    FUEL_DURATION = 0.66    # how much shorter will fuel last than oxidizer (percentage of oxidizer duration) 0.5 is half of oxidizer duration
+    FUEL_DURATION = 1.1    # how much shorter will fuel last than oxidizer (percentage of oxidizer duration) 0.5 is half of oxidizer duration
     OXIDIZER_TANK_DIAMETER = 160
     OXIDIZER_TANK_THICKNESS = 5 #mm
     FUEL_TANK_DIAMETER = 70 #milimeters
@@ -32,7 +32,7 @@ class Config:
 
     # Chamber Properties
     OXIDIZER_TO_FUEL_RATIO = 3.2
-    COMBUSTION_CHAMBER_PRESSURE = 18e5  # pascals (pressure of combustion in chamber)
+    COMBUSTION_CHAMBER_PRESSURE = 28e5  # pascals (pressure of combustion in chamber)
     CHAMBERSAFE_THICKNESS = 5  # mm
 
     # Exhaust Properties
@@ -66,4 +66,7 @@ class Config:
     Cold_Flow_test = False # if True, run the cold flow test if false, run the hot fire test
     flight_simulation = False # if True, run the flight simulation and Cold_Flow_test must be false so Hot fire test can run
 
-    generate_geometry = False
+    generate_Freecad_geometry = False
+
+    nozzle_contour_optimization = True
+    num_of_points_nozzle = 100

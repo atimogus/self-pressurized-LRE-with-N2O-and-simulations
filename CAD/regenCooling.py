@@ -45,7 +45,7 @@ class regenNozzle:
         self.fi_grlo_rad_izlaz, self.fi_grlo_stupnjevi_izlaz = self.calculate_fi_izlaz(self.D_cooling_channels_throat, self.d_cooling_channels_throat)
         self.fi_revolve = self.fi_inlet_stupnjevi_ulaz + self.fi_inlet_stupnjevi_izlaz + 2 * self.fi_alu_stupnjevi
 
-
+        self.minimal_channel_lenght = self.minimal_channel_lenght()
         self.brzina_ucijevi = self.brzina_protoka_uCijevi()
         self.brzina_uKanalu_grlo = self.brzina_protoka_uKanalu(self.D_cooling_channels_throat, self.d_cooling_channels_throat, self.fi_grlo_rad_ulaz)
         self.brzina_uKanalu_inlet = self.brzina_protoka_uKanalu(self.D_cooling_channels_inlet, self.d_cooling_channels_inlet, self.fi_inlet_rad_ulaz)
@@ -130,16 +130,31 @@ class regenNozzle:
                                              (self.D_cooling_channels_throat - self.d_cooling_channels_throat)))
         return visina_prolaz_izmedju_kanala
     
+    def minimal_channel_lenght(self):
+        """Calculate the minimal channel length."""
+        # opseg_d_cooling_channels_throat *  self.fi_grlo_rad_ulaz
+        minimal_length_thickness = np.pi * self.d_cooling_channels_throat * self.fi_grlo_rad_ulaz
+        minimal_lenght_radius  = self.D_cooling_channels_inlet/2 - self.d_cooling_channels_inlet/2
+
+        if minimal_length_thickness < minimal_lenght_radius:
+            minimal_length = minimal_length_thickness
+        else:
+            minimal_length = minimal_lenght_radius
+
+        return minimal_length
+
+
     def printDesign(self):
         """Print the calculated values."""
         print("\n ------------------------REGEN NOZZLE GEOMETRY-------------------------------------------")
         
+        #nozzle throat
         print(f"promjer_grla_mlaznice: {self.promjer_grla_mlaznice:.2f} mm")
         print(f"d_cooling_channels_throat: {self.d_cooling_channels_throat * 1000:.2f} mm")
         print(f"D_cooling_channels_throat: {self.D_cooling_channels_throat * 1000:.2f} mm")
         print(f"D_throat: {self.D_throat * 1000:.2f} mm\n")
 
-
+        #combustion chamber
         print(f"Combustion Chamber Diameter: {self.combustion_chamber_diameter * 1000:.2f} mm")
         print(f"inner_wall_thickness_inlet: {self.inner_wall_thickness_inlet * 1000:.2f} mm")
         print(f"d_cooling_channels_inlet: {self.d_cooling_channels_inlet * 1000:.2f} mm")
@@ -158,6 +173,7 @@ class regenNozzle:
         print(f"brzina_ucijevi: {self.brzina_ucijevi:.6f} m/s")
         print(f"ukupna_povrsina_inlet-ukupna za sve unutarnje kanale: {self.n * ( self.povrsinaKanala(self.D_cooling_channels_inlet, self.d_cooling_channels_inlet, self.fi_inlet_rad_ulaz)):.8f} m^2")
         print(f"ukupna_povrsina_inlet za jedan kanal: {self.povrsinaKanala(self.D_cooling_channels_inlet, self.d_cooling_channels_inlet, self.fi_inlet_rad_ulaz):.8f} m^2")
+
 
 
 # # Example usage

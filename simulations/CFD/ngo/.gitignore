@@ -1,0 +1,34 @@
+# Large mesh files
+*.msh
+*.mesh
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# OpenFOAM
+processor*/
+postProcessing/
+*.log
+log.*
+
+# CAD files
+*.FCStd
+*.FCBak
+
+# Sync files
+*.sync_*
+Desktop.ini
+
+# Large data files
+*.vtk
+*.foam
+*.csv
+results/
+output/
+
+# IDE
+.vscode/
+.idea/

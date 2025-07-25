@@ -96,6 +96,19 @@ class fuel_thermodynamics:
             temperature = self.temperature
         return PropsSI('D', 'P', pressure_liquid, 'T', temperature, self.FUEL)
 
+    def get_dynamic_viscosity(self, pressure_liquid=None, temperature=None):
+        """
+        Returns the dynamic viscosity of the fuel [Pa·s].
+        """
+        if pressure_liquid is None:
+            pressure_liquid = self.pressure_liquid
+        if temperature is None:
+            temperature = self.temperature
+
+        # print(pressure_liquid, temperature)
+        return PropsSI('VISCOSITY', 'P', pressure_liquid, 'T', temperature, 'Ethanol')
+
+
 
 # oxidizer = n2oThermodynamics(300)
 # fuel = fuel_thermodynamics(300, oxidizer.get_pressure_liquid(), 'Acetone')

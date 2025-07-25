@@ -220,7 +220,7 @@ class ColdFlowTestSimulation:
         plt.plot(self.time, self.fuel_pressure , color='green', label='Fuel Pressure')
         plt.plot(exp_time, exp_pressure, color='black', linestyle='--', marker='o', label='Experimental Pressure')
         plt.xlabel('Time (s)')
-        plt.ylabel('Pressure (bar)')
+        plt.ylabel('Pressure (Pa)')
         plt.legend()
         plt.grid(True)
 

@@ -6,6 +6,8 @@ from propulsion.tank.concentricTanks import ConcentricTanks
 from simulations.HotFire import HotFireSimulation
 from simulations.ColdFlowTest import ColdFlowTestSimulation
 from CAD.regenCooling import regenNozzle
+# from simulations.optimisationCFD import optimisationCFD
+from simulations.CFD.ngo.nozzleGeometryOptimisation import start_optimisation
 import json
 import os
 import subprocess
@@ -75,6 +77,15 @@ class initial_design:
 
         self.regenNozzleDesign.printDesign()
 
+        # self.optimisation_CFD = optimisationCFD(config = Config,
+        #             fuel = self.fuel, 
+        #             injector = self.scrintleInjector,
+        #             nozzle = self.nozzle,
+        #             oxidizer = self.oxidizer
+        #             )
+
+        # self.optimisation_CFD.print_results()
+
         if Config.execute_simulation:
             if Config.Cold_Flow_test:
                 # Initialize ColdFlowTestSimulation object
@@ -112,7 +123,7 @@ if __name__ == "__main__":
             print("Flight simulation is not implemented yet.")
 
 
-    if Config.generate_geometry:
+    if Config.generate_Freecad_geometry:
         # Step 1: Extract data from regenNozzleDesign
         regen_data = {
             "fcstd_filename": "mlaznicaCFD.FCStd",
@@ -135,9 +146,9 @@ if __name__ == "__main__":
 
             "CONVERGENT_NOZZLE_ANGLE": Config.CONVERGENT_NOZZLE_ANGLE,
             "DIVERGENT_NOZZLE_ANGLE": Config.DIVERGENT_NOZZLE_ANGLE,
-            "Combustion_Chamber_Height": initialMotorDesign.regenNozzleDesign.combustion_chamber_height,
-            "Divergent_Nozzle_Length": initialMotorDesign.regenNozzleDesign.divergent_nozzle_length,
-            "Convergent_Nozzle_Length": initialMotorDesign.regenNozzleDesign.convergent_nozzle_length,
+            "Combustion_Chamber_Height": initialMotorDesign.nozzle.combustion_chamber_height,
+            "Divergent_Nozzle_Length": initialMotorDesign.nozzle.divergent_nozzle_length,
+            "Convergent_Nozzle_Length": initialMotorDesign.nozzle.convergent_nozzle_length,
         }
 
         # Step 2: Save the data to a JSON file
@@ -145,11 +156,19 @@ if __name__ == "__main__":
         with open(data_file, "w") as f:
             json.dump(regen_data, f)
 
-        print(f"Design data saved to {data_file}")
+        print(f"\nDesign data saved to {data_file}")
 
         # Step 3: Start FreeCAD with the geometryFreecad.py script
-        geometry_script = os.path.join(os.path.dirname(__file__), "CAD", regen_data["fcstd_filename"])
-        freecad_appimage = os.path.abspath("../FreeCAD1.0.AppImage")  # Full path to the FreeCAD AppImage
+        geometry_script = os.path.join(os.path.dirname(__file__), "CAD", "geometryFreecad.py")
+        freecad_appimage = os.path.abspath("./CAD/FreeCAD1.0.AppImage")  # Full path to the FreeCAD AppImage
         subprocess.run([freecad_appimage, geometry_script])
 
+    if Config.nozzle_contour_optimization:
+        start_optimisation(y_combustion_chamber = initialMotorDesign.nozzle.combustion_chamber_diameter / 2,
+                           y_exit = initialMotorDesign.nozzle.exit_diameter / 2,
+                           y_throat = initialMotorDesign.nozzle.throat_diameter / 2,
+                           num_of_points_nozzle = Config.num_of_points_nozzle
+                           )
+        
+                           
 
