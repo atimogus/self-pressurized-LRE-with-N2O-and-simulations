@@ -1,0 +1,12 @@
+cantera==3.1.0
+coolprop==6.8.0
+foamlib==1.1.2
+gmsh==4.14.0
+matplotlib==3.10.3
+Mesh==1.0.0a1
+numpy==2.3.2
+pandas==2.3.1
+pyvista==0.45.0
+rocketpy==1.9.0
+SciencePlots==2.1.1
+scipy==1.16.0
