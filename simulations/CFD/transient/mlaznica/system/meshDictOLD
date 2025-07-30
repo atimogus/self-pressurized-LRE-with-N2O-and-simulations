@@ -1,0 +1,58 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                |
+| \\      /  F ield         | cfMesh: A library for mesh generation          | 
+|  \\    /   O peration     |                                                |
+|   \\  /    A nd           | Author: Franjo Juretic                         | 
+|    \\/     M anipulation  | E-mail: franjo.juretic@c-fields.com            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version   2.0;
+    format    ascii;
+    class     dictionary;
+    location  "system";
+    object    meshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile "tube.stl";
+
+maxCellSize 0.002;
+
+//boundaryCellSize 0.01;
+
+boundaryLayers
+{
+//    nLayers 5;
+
+//    thicknessRatio 1.1;
+
+//    maxFirstLayerThickness 0.001;
+
+    patchBoundaryLayers
+    {
+		"wall"
+		{
+			nLayers 5;
+			thicknessRatio	1.2;
+			maxFirstLayerThickness	0.001;
+			allowDiscontinuity	0;
+		}
+    }
+} 
+
+anisotropicSources
+	{
+		plane
+		{
+		type plane;
+		normal (0 1 0);
+		origin (0 0 0);
+		scalingDistance 0.1;
+		scalingFactor 2;
+		}
+	}
+
+// ************************************************************************* //

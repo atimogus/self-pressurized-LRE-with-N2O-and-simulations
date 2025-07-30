@@ -1,0 +1,103 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0/solid-domena";
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [ 0 0 0 1 0 0 0 ];
+
+internalField   uniform 300;
+
+boundaryField
+{
+    wall-unutra
+    {
+        type            externalWallHeatFluxTemperature;
+        value           uniform 700;
+        Ta              uniform 300;
+        h               uniform 20;
+        kappa           none;
+        kappaName       none;
+        kappaMethod     solidThermo;
+        mode            coefficient;
+    }
+    wall-unutra-ref
+    {
+        type            externalWallHeatFluxTemperature;
+        value           uniform 700;
+        Ta              uniform 300;
+        h               uniform 20;
+        kappa           none;
+        kappaName       none;
+        kappaMethod     solidThermo;
+        mode            coefficient;
+    }
+    wall-vani
+    {
+        type            externalWallHeatFluxTemperature;
+        value           uniform 300;
+        Ta              uniform 300;
+        h               uniform 20;
+        kappa           none;
+        kappaName       none;
+        kappaMethod     solidThermo;
+        mode            coefficient;
+    }
+    wall-vani-ref
+    {
+        type            externalWallHeatFluxTemperature;
+        value           uniform 300;
+        Ta              uniform 300;
+        h               uniform 20;
+        kappa           none;
+        kappaName       none;
+        kappaMethod     solidThermo;
+        mode            coefficient;
+    }
+    intersection-wall
+    {
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 300;
+        Tnbr            T;
+        kappa           solidThermo;
+        kappaName       none;
+        kappaMethod     solidThermo;
+    }
+    wedge-wall
+    {
+        type            externalWallHeatFluxTemperature;
+        value           uniform 300;
+        Ta              uniform 300;
+        h               uniform 20;
+        kappa           none;
+        kappaName       none;
+        kappaMethod     solidThermo;
+        mode            coefficient;
+    }
+    wedge-wall-coolant
+    {
+        type            externalWallHeatFluxTemperature;
+        value           uniform 300;
+        Ta              uniform 300;
+        h               uniform 20;
+        kappa           none;
+        kappaName       none;
+        kappaMethod     solidThermo;
+        mode            coefficient;
+    }
+}
+
+
+// ************************************************************************* //

@@ -1,0 +1,57 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      thermophysicalProperties;
+    // aluminium - uzeto iz tutoruiala heattransfer-CPU
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+thermoType
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+mixture
+{
+    specie
+    {
+        nMoles      1;
+        molWeight   26.98; // Aluminium atomic weight (approx) kg/kmol
+    }
+
+    transport
+    {
+        kappa           202.4; // Thermal conductivity [W/(m·K)]
+    }
+
+    thermodynamics
+    {
+        Hf              0;
+        Sf              0;
+        Cp              871; // Specific heat capacity [J/(kg·K)]
+    }
+
+    equationOfState
+    {
+        rho             2719;  // Density [kg/m³]
+    }
+}
+// limitTemperature    yes;
+// minTemperature      250;
+// maxTemperature      2000;
+// ************************************************************************* //

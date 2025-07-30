@@ -1,0 +1,184 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+boundary
+{
+    inlet
+    {
+        type            patch;
+    }
+	outlet
+    {
+        type            patch;
+    }
+	
+	wall
+	{
+		type            wall;
+	}
+    back
+    {
+        type            wedge;
+    }
+    front
+    {
+        type            wedge;
+    }
+    
+}
+
+
+// U
+// {
+//     internalField   uniform (0 0 0);
+
+//     boundaryField
+//     {
+// 		inlet
+// 		{
+//             type            fixedValue;
+//             value           uniform (0 0 -1);
+// 		}
+// 		outlet
+// 		{
+// 			type	zeroGradient;
+// 		}
+//         intersection-wall
+//         {
+//             type            fixedValue;
+//             value           uniform (0 0 0);
+//         }
+//         wall-outlet
+//         {
+//             type            fixedValue;
+//             value           uniform (0 0 0);
+//         }
+//     }
+// }
+
+// T
+// {
+//     internalField   uniform 300;
+
+//     boundaryField
+//     {
+// 		inlet
+//         {
+//             type            fixedValue;//zeroGradient;
+// 			value			uniform 400;
+//         }
+// 		outlet
+//         {
+//             type            zeroGradient;
+//         }
+//         intersection-wall
+//         {
+//             type            compressible::turbulentTemperatureCoupledBaffleMixed;
+//             Tnbr            T;
+//             kappa           fluidThermo;
+//             kappaName       none;
+//             value           uniform 300;
+//         }
+//         wall-outlet
+//         {
+//             type            zeroGradient;
+//         }
+//     }
+// }
+
+// epsilon
+// {
+//     // Set the value on all bc to non-zero. Not used in simulation
+//     // since zeroGradient; only used in initialisation.
+//     internalField   uniform 0.01;
+
+//     boundaryField
+//     {
+//         ".*"
+//         {
+//             type            compressible::epsilonWallFunction;
+//             value           uniform 0.01;
+//         }
+//     }
+// }
+
+// k
+// {
+//     internalField   uniform 0.1;
+
+//     boundaryField
+//     {
+//         ".*"
+//         {
+//             type            compressible::kqRWallFunction;
+//             value           uniform 0.1;
+//         }
+//     }
+// }
+
+// p_rgh
+// {
+//     internalField   uniform 1e5;
+
+//     boundaryField
+//     {
+//         	".*"
+// 			{
+// 			    type            zeroGradient;
+// 			    value           uniform 1e5;
+// 			}
+// 		    inlet
+// 			{
+// 			type            zeroGradient;
+// 			} 
+			
+// 		    outlet
+// 			{
+// 				type            fixedValue;
+// 				value           $internalField;
+// 			}	
+			
+
+//     }
+// }
+
+// p
+// {
+//     internalField   uniform 1e5;
+
+//     boundaryField
+//     {
+//         	".*"
+// 			{
+// 			    type            zeroGradient;
+// 			    value           uniform 1e5;
+// 			}
+// 		    inlet
+// 			{
+// 			type            zeroGradient;
+// 			} 
+			
+// 		    outlet
+// 			{
+// 				type            fixedValue;
+// 				value           $internalField;
+// 			}	
+			
+
+//     }
+// }
+
+// ************************************************************************* //

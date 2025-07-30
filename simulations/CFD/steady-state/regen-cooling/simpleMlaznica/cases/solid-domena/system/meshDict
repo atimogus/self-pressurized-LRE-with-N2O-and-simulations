@@ -1,0 +1,96 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                |
+| \\      /  F ield         | cfMesh: A library for mesh generation          | 
+|  \\    /   O peration     |                                                |
+|   \\  /    A nd           | Author: Franjo Juretic                         | 
+|    \\/     M anipulation  | E-mail: franjo.juretic@c-fields.com            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version   2.0;
+    format    ascii;
+    class     dictionary;
+    location  "system";
+    object    meshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile "solid-domena.stl";
+
+maxCellSize 0.9;
+
+//boundaryCellSize 0.5;
+
+//minCellSize 2.0;
+
+/* localRefinement
+{
+    wall-unutra-ref
+    {
+        cellSize 0.75;
+    }
+    wall-vani-ref
+    {
+        cellSize 0.75;
+    }
+} */
+/*
+localRefinement
+{
+    wall-unutra
+    {
+        cellSize 0.5;
+    }
+    wall-vani
+    {
+        cellSize 0.5;
+    }
+    intersection-wall
+    {
+        cellSize 0.5;
+    }
+    wedge-wall-coolant
+    {
+        cellSize 0.5;
+    }
+}
+*/
+
+/* boundaryLayers
+{
+//    nLayers 3;
+
+//    thicknessRatio 1.2;
+
+//    maxFirstLayerThickness 0.5;
+
+    patchBoundaryLayers
+    {
+
+        
+        wedge-wall-coolant
+        {
+            nLayers           5;
+
+            thicknessRatio    1.5;
+
+            maxFirstLayerThickness 10;
+
+            allowDiscontinuity 0;
+        }
+    }
+
+     optimiseLayer 1;
+ 
+    optimisationParameters
+    {
+        nSmoothNormals 5;
+        relThicknessTol 0.15;
+        featureSizeFactor 0.3;
+        reCalculateNormals 1;
+        maxNumIterations 5;
+    }  
+}  */
+

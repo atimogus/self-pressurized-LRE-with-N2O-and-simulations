@@ -1,0 +1,13 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/CleanFunctions      # Tutorial clean functions
+#------------------------------------------------------------------------------
+
+rm -r \
+   proc* \
+   log.* \
+   0.00* \
+   structured_nozzle_3D.msh2 \
+   ;
+
+#------------------------------------------------------------------------------

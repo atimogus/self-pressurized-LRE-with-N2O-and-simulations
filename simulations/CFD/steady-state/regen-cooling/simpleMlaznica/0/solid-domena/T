@@ -1,0 +1,63 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       volScalarField;
+    location    "0/solid-domena";
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [ 0 0 0 1 0 0 0 ];
+
+internalField   uniform 300;
+
+boundaryField
+{
+    wall-unutra
+    {
+        type            fixedValue;
+        value           uniform 1800;
+    }
+    wall-unutra-ref
+    {
+        type            fixedValue;
+        value           uniform 1800;
+    }
+    wall-vani
+    {
+        type            zeroGradient;
+    }
+    wall-vani-ref
+    {
+        type            zeroGradient;
+    }
+    intersection-wall
+    {
+        type            compressible::turbulentTemperatureCoupledBaffleMixed;
+        value           uniform 300;
+        Tnbr            T;
+        kappa           solidThermo;
+        kappaName       none;
+        kappaMethod     solidThermo;
+    }
+    symmetry2
+    {
+        type            cyclicAMI;
+    }
+    symmetry1
+    {
+        type            cyclicAMI;
+    }
+}
+
+
+// ************************************************************************* //

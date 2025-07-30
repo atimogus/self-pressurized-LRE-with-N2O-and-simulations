@@ -1,0 +1,12 @@
+cantera
+coolprop
+foamlib
+gmsh
+matplotlib
+Mesh
+numpy
+pandas
+pyvista
+rocketpy
+SciencePlots
+scipy

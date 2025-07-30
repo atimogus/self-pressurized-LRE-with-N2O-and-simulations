@@ -1,0 +1,43 @@
+#!/bin/sh
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+./Allclean
+
+freecad_path=/home/rtx3060/Desktop/Freecad/FreeCAD1.0.AppImage
+$freecad_path --console mlaznica3.py
+
+cd ./cases/geometrija
+
+cat intersection-wall.stl  wall-unutra.stl wall-unutra-ref.stl wall-vani.stl wall-vani-ref.stl symmetry1.stl symmetry2.stl >> solid-domena.stl
+cat inlet.stl outlet.stl intersection-wall.stl >> fluid-domena.stl 
+
+cd ../../
+
+cp -r cases/geometrija/solid-domena.stl cases/solid-domena/
+cp -r cases/geometrija/fluid-domena.stl cases/fluid-domena/
+
+cartesianMesh -case cases/fluid-domena
+tetMesh -case cases/solid-domena
+
+### ===> SCALE MESH FROM mm TO m <===
+transformPoints -case cases/fluid-domena -scale '(0.001 0.001 0.001)'     ### ADDED
+transformPoints -case cases/solid-domena -scale '(0.001 0.001 0.001)'     ### ADDED
+### <=== END SCALE MESH ===
+
+cp -r cases/fluid-domena/constant/polyMesh/ constant/fluid-domena
+cp -r cases/solid-domena/constant/polyMesh/ constant/solid-domena
+
+# # remove fluid fields from solid regions (important for post-processing)
+
+
+rm -f 0*/solid-domena/p_rgh
+rm -f 0*/solid-domena/epsilon
+rm -f 0*/solid-domena/U
+
+changeDictionary -region fluid-domena
+changeDictionary -region solid-domena
+
+
+chtMultiRegionSimpleFoam
+# runApplication $(getApplication)
